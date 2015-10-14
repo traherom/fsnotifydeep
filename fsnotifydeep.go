@@ -3,8 +3,8 @@
 // of the monitored directories changes, fsnotify is updated accordingly.
 //
 // In addition, fsnotifydeep adds a Filter feature to Watchers, allowing the client
-// to specify a function literal that determines in an event should appear on the
-// Events channel or quietly dropped.
+// to specify a function literal that determines if an event should appear on the
+// Events channel or be quietly dropped.
 //
 // The primary downside of this package is a performance hit. The exact amount
 // will depend on the size of the filesystem under monitor.
