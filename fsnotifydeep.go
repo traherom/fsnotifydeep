@@ -11,6 +11,7 @@
 package fsnotifydeep
 
 import (
+	"fmt"
 	"os"
 	"path/filepath"
 
@@ -135,6 +136,11 @@ func (w *Watcher) Filter(filter FsnotifyFilter) {
 // Adds everything under the given path to the watcher
 func addToWatch(watcher *fsnotify.Watcher, path string) error {
 	err := filepath.Walk(path, func(path string, info os.FileInfo, err error) error {
+		if err != nil {
+			fmt.Println("Error in adding to watch:", err)
+			return nil
+		}
+
 		if info.IsDir() {
 			return watcher.Add(path)
 		}
@@ -147,6 +153,11 @@ func addToWatch(watcher *fsnotify.Watcher, path string) error {
 // Remove everything under the given path from the watcher
 func removeFromWatch(watcher *fsnotify.Watcher, path string) error {
 	err := filepath.Walk(path, func(path string, info os.FileInfo, err error) error {
+		if err != nil {
+			fmt.Println("Error in removing from watch:", err)
+			return nil
+		}
+
 		if info.IsDir() {
 			return watcher.Remove(path)
 		}
